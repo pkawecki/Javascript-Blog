@@ -103,8 +103,13 @@ body {
 
 .post {
   display: none;
+  transition: all 1s;
   &.active {
     display: block;
+    opacity: 0;
+    &.runningForSecond{
+      opacity: 1;
+    }
   }
 }
 

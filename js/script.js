@@ -1,51 +1,68 @@
 'use strict'
-// document.getElementById('test-button').addEventListener('click', function(){
-  //  const links = document.querySelectorAll('.titles a');
-//     console.log(links);
-// })
 
-    const titleClickHandler = function(event){
-
-        event.preventDefault();
-        console.log(event);
-        console.log('Link was clicked');
-        
-        /*[DONE] remove class 'active' from all article links  */
-        const activeLinks = document.querySelectorAll('.titles a.active');
-        for (let activeLink of activeLinks) {
-            activeLink.classList.remove('active');
-        }
-
-        /* [IN PROGRESS] add class 'active' to the clicked link */
-        const clickedElement = this;
-        console.log('clickedElement:',clickedElement);
-        console.log('clickedElement(with plus):' + clickedElement);
-        clickedElement.classList.add('active');
-
-
-        /* [DONE] remove class 'active' from all articles */
-        const aciveArticles = document.querySelectorAll(".posts .active");
-        for(let activeArticle of aciveArticles) {
-            activeArticle.classList.remove('active');
-        }
-
-
-        /* get 'href' attribute from the clicked link */
-        let hrefAtt = clickedElement.getAttribute('href');
-        console.log(hrefAtt);
-
-        /* find the correct article using the selector (value of 'href' attribute) */
-        let searchedArticle = document.querySelector(hrefAtt);
-        console.log(searchedArticle);
-        
-        /* add class 'active' to the correct article */
-        searchedArticle.classList.add('active');
-    }
-
-    const links = document.querySelectorAll('.titles a');
-
-    for (let link of links){
-        link.addEventListener ('click', titleClickHandler);
-    }
-
+//Handler in constant
+const titleClickHandler = function(event) {
+    console.log('link was clicked');
+    console.log(event);
     
+    event.preventDefault();
+    const clickedElement = this;
+
+/* remove class 'active' from all article links  */
+    const activeLinks = document.querySelectorAll('.titles a.active');
+    
+    for(let activeLink of activeLinks) {
+        activeLink.classList.remove('active');
+        console.log('active class removed');
+    }
+/* add class 'active' to the clicked link */
+    clickedElement.classList.add('active');
+
+/* remove class 'active' from all articles */
+    const activeArticles = document.querySelectorAll('.posts .active');
+    
+    for(let activeArticle of activeArticles) {
+        activeArticle.classList.remove('active' ,'runningForSecond');
+    }
+/* get 'href' attribute from the clicked link */
+    const hrefAtt  = clickedElement.getAttribute('href');
+
+/* find the correct article using the selector (value of 'href' attribute) */
+    const searchedArticle = document.querySelector(hrefAtt);
+    console.log(searchedArticle);
+  
+/* add class 'active' to the correct article */
+    searchedArticle.classList.add('active');
+    setTimeout(function(){searchedArticle.classList.add('runningForSecond')}, 200);
+}
+
+const generateTitleLinks = function(){
+//Remove content of list in left column
+document.querySelector('.list.titles').innerHTML = "";
+
+//For each  article:
+    const articles = document.querySelectorAll('.post');
+    let newHtml, currentTitle, currentId; 
+
+    for(let article of articles) {
+        //  -read article id and assign it to a constant value
+        currentId = article.id;
+        
+        //  -find element with title name and assign it to a constant value
+        currentTitle = article.querySelector('.post-title').innerHTML;
+
+        //  Based on those create HTML code and assign it to a constant
+        newHtml = '<li><a href="#'+currentId+'"><span>'+currentTitle+'</span></a></li>';
+
+        // Insert newly created code to link list in left column
+        document.querySelector('.list.titles').innerHTML += newHtml;
+    }
+}
+
+
+//List in constant
+const listOfLinks = document.querySelectorAll('.titles a');
+
+for (let link of listOfLinks){
+    link.addEventListener("click", titleClickHandler);
+}
