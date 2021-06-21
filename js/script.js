@@ -20,7 +20,7 @@ const titleClickHandler = function(event) {
 
 /* remove class 'active' from all articles */
     const activeArticles = document.querySelectorAll('.posts .active');
-    
+    console.log('removed active class');
     for(let activeArticle of activeArticles) {
         activeArticle.classList.remove('active' ,'runningForSecond');
     }
@@ -52,14 +52,15 @@ document.querySelector('.list.titles').innerHTML = "";
         currentTitle = article.querySelector('.post-title').innerHTML;
 
         //  Based on those create HTML code and assign it to a constant
+        
         newHtml = '<li><a href="#'+currentId+'"><span>'+currentTitle+'</span></a></li>';
-
+        console.log(newHtml);
         // Insert newly created code to link list in left column
         document.querySelector('.list.titles').innerHTML += newHtml;
     }
 }
 
-
+generateTitleLinks;
 //List in constant
 const listOfLinks = document.querySelectorAll('.titles a');
 
