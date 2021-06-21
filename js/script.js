@@ -36,7 +36,7 @@ const titleClickHandler = function(event) {
     setTimeout(function(){searchedArticle.classList.add('runningForSecond')}, 200);
 }
 
-const generateTitleLinks = function(){
+function generateTitleLinks (){
 //Remove content of list in left column
 document.querySelector('.list.titles').innerHTML = "";
 
@@ -60,7 +60,7 @@ document.querySelector('.list.titles').innerHTML = "";
     }
 }
 
-generateTitleLinks;
+generateTitleLinks ();
 //List in constant
 const listOfLinks = document.querySelectorAll('.titles a');
 
