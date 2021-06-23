@@ -99,11 +99,17 @@ function generateTags(){
     event.preventDefault();
     /* make new constant named "clickedElement" and give it the value of "this" */
     const clickedElement = this;
-
+    console.log(this);
+    console.log(event);
+   
     /* make a new constant "href" and read the attribute "href" of the clicked element */
-  
+    const href = clickedElement.getAttribute('href');
+    console.log(href);
+
     /* make a new constant "tag" and extract tag from the "href" constant */
-  
+    const tag = href.replace('#tag-','');
+    console.log(tag);
+
     /* find all tag links with class active */
   
     /* START LOOP: for each active tag link */
@@ -125,21 +131,23 @@ function generateTags(){
   
   function addClickListenersToTags(){
     /* find all links to tags */
-    const tagLinks = document.querySelectorAll('a.active[href^="#tag-"]');
-    console.log(tagLinks);
+    const tagLinks = document.querySelectorAll('a[href^="#tag-"]');  //^="#tag-"
+
     /* START LOOP: for each link */
     for (let tagLink of tagLinks){
-        console.log(tagLink);
-      /* add tagClickHandler as event listener for that link */
-        //tagLink
 
+      /* add tagClickHandler as event listener for that link */
+        tagLink.addEventListener("click", tagClickHandler);
     /* END LOOP: for each link */
     }
   }
   
+
+  generateTags();
+  generateTitleLinks();
   addClickListenersToTags();
-generateTags();
-generateTitleLinks();
+
+
 //List in constant
 const listOfLinks = document.querySelectorAll('.titles a');
 
