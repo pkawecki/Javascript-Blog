@@ -88,7 +88,7 @@ function generateTags(){
         }
       /* insert HTML of all the links into the tags wrapper */
       
-        document.querySelector('.list.list-horizontal').innerHTML += html;
+        article.querySelector('.list-horizontal').innerHTML += html;
         
     /* END LOOP: for every article: */  
     }
@@ -111,7 +111,8 @@ function generateTags(){
     console.log(tag);
 
     /* find all tag links with class active */
-  
+    const activeTagLinks = document.querySelectorAll('a.active');
+    console.log(activeTagLinks);
     /* START LOOP: for each active tag link */
   
       /* remove class active */
