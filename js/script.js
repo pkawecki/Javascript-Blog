@@ -1,4 +1,7 @@
 'use strict';
+const optArticleSelector = '.post';
+      optTitleSelector = '.post-title';
+      optTitleSelector = '.titles';
 
 //Handler in constant
 const titleClickHandler = function (event) {
@@ -40,7 +43,7 @@ function generateTitleLinks(customSelector='') {
     document.querySelector('.list.titles').innerHTML = '';
 
     //For each  article:
-    let optArticleSelector = '.post';
+    
     const articles = document.querySelectorAll(optArticleSelector+customSelector);
     // console.log(articles);
     console.log('customSelector '+customSelector);
@@ -104,7 +107,7 @@ function tagClickHandler(event){
     event.preventDefault();
     /* make new constant named "clickedElement" and give it the value of "this" */
     const clickedElement = this;
-    console.log(this);
+    console.log('this '+this);
     console.log(event);
    
     /* make a new constant "href" and read the attribute "href" of the clicked element */
@@ -140,6 +143,7 @@ function tagClickHandler(event){
     } 
   
     /* execute function "generateTitleLinks" with article selector as argument */
+    console.log('chuj');
     generateTitleLinks('[data-tags~="' + tag + '"]');
 }
   
