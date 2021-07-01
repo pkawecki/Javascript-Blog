@@ -30,6 +30,9 @@ function generateTitleLinks(customSelector='') {
         // Insert newly created code to link list in left column
         document.querySelector('.list.titles').innerHTML += newHtml;
     }
+
+// add listeners since those present are futile
+  addClickListenersToTitles();
 }
 
 function generateAuthors() {
@@ -43,14 +46,14 @@ function generateAuthors() {
     
     
         //get author name from .post-author
-        let authorCredentials = currentAuthorRef.innerHTML.substring(3);
-        //console.log(authorCredentials); 
+        let authorCredentials = article.getAttribute('data-author');
+        console.log(authorCredentials); 
 
         //clear current author wrapper
         currentAuthorRef.innerHTML='';
 
         //create link with reference to author
-        let link = '<a href="#author">'+authorCredentials +'</a>';
+        let link = '<a href="#author-'+authorCredentials+'">'+'by '+authorCredentials +'</a>';
         // console.log(link);
 
         //insert link to autor paragraph
@@ -104,9 +107,16 @@ function authorClickHandler(event){
   const clickedElement = this;
   console.log(this);
 
-  
+  /* make a new constant "href" and read the attribute "href" of the clicked element */
+  const href = clickedElement.getAttribute('href');
 
-  
+  //extract author first and last name
+  const authorName = href.replace('#author-','');
+
+
+  //execute function "generateTitleLinks" with article selector as argument
+  generateTitleLinks('[data-author="' + authorName + '"]');
+    
 }
 
 function tagClickHandler(event){
@@ -152,6 +162,7 @@ function tagClickHandler(event){
     /* execute function "generateTitleLinks" with article selector as argument */
     
     generateTitleLinks('[data-tags~="' + tag + '"]');
+
 }
 
 function addClickListenersToAuthors(){
